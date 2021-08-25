@@ -179,9 +179,9 @@ class Planimetria {
 }
 
 let dataCimexes = [
-  new PlanimetriaEntity(10, 27, 'Mosca 1234')
-    .calculateX(1700, 40)
-    .calculateY(1300, 28),
+  new PlanimetriaEntity(10, 25, 'Mosca 1234')
+    .calculateX(875, 40)
+    .calculateY(625, 28),
   // new PlanimetriaEntity(12, 25, 'Mosca EFG')
   //   .calculateX(1700, 40)
   //   .calculateY(1300, 27),
@@ -201,7 +201,7 @@ let dataCimexes = [
   //{x :135, y : 70, code : 'test'}
 ];
 
-let plan = new Planimetria(1700, 1300, false);
+let plan = new Planimetria(875, 625, false);
 document.body.appendChild(plan.app.view);
 plan.drawPlanimetria(dataCimexes,10,10);
 
