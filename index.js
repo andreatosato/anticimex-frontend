@@ -14,10 +14,8 @@ class PlanimetriaEntity {
     return this;
   }
 
-  calculateY(maxWidth, maxYGraduate){
-    console.log(this.proportionY, maxWidth, maxYGraduate);
-    this.y = maxWidth - ((this.proportionY * maxWidth)/maxYGraduate);
-    console.log(this.y);
+  calculateY(maxHeight, maxYGraduate){
+    this.y = maxHeight - ((this.proportionY * maxHeight)/maxYGraduate);
     return this;
   }
 }
@@ -104,6 +102,7 @@ class Planimetria {
         cimex.y = c.y;
         cimex.width = cimexWidth;
         cimex.height = cimexHeight;
+        cimex.zIndex = 10;
         cimex.anchor.set(0.5);
         cimex
           .on('pointerdown', this.onDragStart.bind(this, cimex))
