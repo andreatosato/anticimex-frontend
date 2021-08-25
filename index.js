@@ -50,7 +50,7 @@ class Planimetria {
     this.app.stage.addChild(this.container);
 
     PIXI.Texture.fromURL(
-      'https://clentini-my.sharepoint.com/:i:/g/personal/andrea_tosato_hudi_it/EWqlDzC6oTlDtLKH5Ar1_OIB9kaw4CrLE0XyVL3h2ZForQ?e=QMubQ8'
+      'https://raw.githubusercontent.com/andreatosato/anticimex-frontend/master/maps.png'
     ).then(tx => {
       let background = new PIXI.Sprite(tx);
       console.log('back');
