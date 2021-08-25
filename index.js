@@ -15,6 +15,7 @@ class PlanimetriaEntity {
   }
 
   calculateY(maxHeight, maxYGraduate){
+    console.log(maxHeight - ((this.proportionY * maxHeight)/maxYGraduate));
     this.y = maxHeight - ((this.proportionY * maxHeight)/maxYGraduate);
     return this;
   }
@@ -69,10 +70,10 @@ class Planimetria {
 
     this.style = new PIXI.TextStyle({
       fontFamily: 'Arial',
-      fontSize: 8,
-      fill: ['#ffffff'],
-      stroke: '#4a1850',
-      strokeThickness: 2,
+      fontSize: 14,
+      fill: ['#000000'],
+      stroke: '#000000', //'#4a1850',
+      strokeThickness: 0,
       dropShadow: false,
       wordWrap: true,
       wordWrapWidth: 440,
@@ -98,6 +99,7 @@ class Planimetria {
         cimex.code = c.code;
         cimex.interactive = true;
         cimex.buttonMode = true;
+        console.log('draw ' + c.y);
         cimex.x = c.x;
         cimex.y = c.y;
         cimex.width = cimexWidth;
@@ -177,12 +179,26 @@ class Planimetria {
 }
 
 let dataCimexes = [
-  new PlanimetriaEntity(10, 25, 'Mosca 1234').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(12, 25, 'Mosca EFG').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(15, 15, 'Mosca HGO').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(2, 5, 'Mosca EFJ').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(8, 2, 'Mosca YBN').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(9, 19, 'Mosca PLN').calculateX(1700, 40).calculateY(1300, 28)
+  new PlanimetriaEntity(10, 27, 'Mosca 1234')
+    .calculateX(1700, 40)
+    .calculateY(1300, 28),
+  // new PlanimetriaEntity(12, 25, 'Mosca EFG')
+  //   .calculateX(1700, 40)
+  //   .calculateY(1300, 27),
+  // new PlanimetriaEntity(15, 15, 'Mosca HGO')
+  //   .calculateX(1700, 40)
+  //   .calculateY(1300, 27),
+  // new PlanimetriaEntity(2, 5, 'Mosca EFJ')
+  //   .calculateX(1700, 40)
+  //   .calculateY(1300, 27),
+  // new PlanimetriaEntity(8, 2, 'Mosca YBN')
+  //   .calculateX(1700, 40)
+  //   .calculateY(1300, 28),
+  // new PlanimetriaEntity(9, 19, 'Mosca PLN')
+  //   .calculateX(1700, 40)
+  //   .calculateY(1300, 28),
+
+  //{x :135, y : 70, code : 'test'}
 ];
 
 let plan = new Planimetria(1700, 1300, false);
