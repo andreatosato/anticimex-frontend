@@ -99,12 +99,11 @@ class Planimetria {
         cimex.code = c.code;
         cimex.interactive = true;
         cimex.buttonMode = true;
-        console.log('draw ' + c.y);
         cimex.x = c.x;
         cimex.y = c.y;
         cimex.width = cimexWidth;
         cimex.height = cimexHeight;
-        cimex.zIndex = 10;
+        cimex.zIndex = 1;
         cimex.anchor.set(0.5);
         cimex
           .on('pointerdown', this.onDragStart.bind(this, cimex))
