@@ -16,7 +16,6 @@ class PlanimetriaEntity {
   }
 
   calculateY(maxHeight, maxYGraduate){
-    console.log(maxHeight - ((this.proportionY * maxHeight)/maxYGraduate));
     this.y = maxHeight - ((this.proportionY * maxHeight)/maxYGraduate);
     return this;
   }
