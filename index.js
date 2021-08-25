@@ -10,7 +10,8 @@ class PlanimetriaEntity {
   }
 
   calculateX(maxWidth, maxXGraduate){
-    this.x = (this.proportionX * maxWidth)/maxXGraduate;
+    let offset = Math.trunc((1/maxXGraduate) * maxWidth);
+    this.x = ((this.proportionX * maxWidth)/maxXGraduate) - offset;
     return this;
   }
 
@@ -178,25 +179,29 @@ class Planimetria {
 
 }
 
+let maxWidth = 39;
+let maxHeight = 28;
+let width = 875;
+let height = 625;
 let dataCimexes = [
-  new PlanimetriaEntity(10, 25, 'Mosca 1234')
-    .calculateX(875, 40)
-    .calculateY(625, 28),
-  // new PlanimetriaEntity(12, 25, 'Mosca EFG')
-  //   .calculateX(1700, 40)
-  //   .calculateY(1300, 27),
-  // new PlanimetriaEntity(15, 15, 'Mosca HGO')
-  //   .calculateX(1700, 40)
-  //   .calculateY(1300, 27),
-  // new PlanimetriaEntity(2, 5, 'Mosca EFJ')
-  //   .calculateX(1700, 40)
-  //   .calculateY(1300, 27),
-  // new PlanimetriaEntity(8, 2, 'Mosca YBN')
-  //   .calculateX(1700, 40)
-  //   .calculateY(1300, 28),
-  // new PlanimetriaEntity(9, 19, 'Mosca PLN')
-  //   .calculateX(1700, 40)
-  //   .calculateY(1300, 28),
+  new PlanimetriaEntity(10, 2, 'Mosca 1234')
+    .calculateX(width, maxWidth)
+    .calculateY(height, maxHeight),
+  new PlanimetriaEntity(12, 25, 'Mosca EFG')
+    .calculateX(width, maxWidth)
+    .calculateY(height, maxHeight),
+  new PlanimetriaEntity(15, 15, 'Mosca HGO')
+    .calculateX(width, maxWidth)
+    .calculateY(height, maxHeight),
+  new PlanimetriaEntity(2, 5, 'Mosca EFJ')
+    .calculateX(width, maxWidth)
+    .calculateY(height, maxHeight),
+  new PlanimetriaEntity(8, 2, 'Mosca YBN')
+    .calculateX(width, maxWidth)
+    .calculateY(height, maxHeight),
+  new PlanimetriaEntity(9, 19, 'Mosca PLN')
+    .calculateX(width, maxWidth)
+    .calculateY(height, maxHeight),
 
   //{x :135, y : 70, code : 'test'}
 ];
