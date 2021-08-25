@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js';
 class PlanimetriaEntity {
   constructor(x, y, code, description, image) {
     this.proportionX = x;
-    this.propotionY = y;
+    this.proportionY = y;
     this.code = code;
     this.description = description;
     this.image = image;
@@ -11,12 +11,14 @@ class PlanimetriaEntity {
 
   calculateX(maxWidth, maxXGraduate){
     this.x = (this.proportionX * maxWidth)/maxXGraduate;
+    return this;
   }
 
   calculateY(maxWidth, maxYGraduate){
     console.log(this.proportionY, maxWidth, maxYGraduate);
     this.y = maxWidth - ((this.proportionY * maxWidth)/maxYGraduate);
     console.log(this.y);
+    return this;
   }
 }
 
@@ -176,12 +178,12 @@ class Planimetria {
 }
 
 let dataCimexes = [
-  new PlanimetriaEntity(10, 10, 'Mosca 1234').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(12, 10, 'Mosca EFG').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(15, 10, 'Mosca HGO').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(2, 250, 'Mosca EFJ').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(8, 250, 'Mosca YBN').calculateX(1700, 40).calculateY(1300, 28),
-  new PlanimetriaEntity(9, 250, 'Mosca PLN').calculateX(1700, 40).calculateY(1300, 28)
+  new PlanimetriaEntity(10, 25, 'Mosca 1234').calculateX(1700, 40).calculateY(1300, 28),
+  new PlanimetriaEntity(12, 25, 'Mosca EFG').calculateX(1700, 40).calculateY(1300, 28),
+  new PlanimetriaEntity(15, 15, 'Mosca HGO').calculateX(1700, 40).calculateY(1300, 28),
+  new PlanimetriaEntity(2, 5, 'Mosca EFJ').calculateX(1700, 40).calculateY(1300, 28),
+  new PlanimetriaEntity(8, 2, 'Mosca YBN').calculateX(1700, 40).calculateY(1300, 28),
+  new PlanimetriaEntity(9, 19, 'Mosca PLN').calculateX(1700, 40).calculateY(1300, 28)
 ];
 
 let plan = new Planimetria(1700, 1300, false);
