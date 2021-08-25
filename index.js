@@ -78,7 +78,7 @@ class Planimetria {
     this.dragEndCallBack = callback;
   }
 
-  drawPlanimetria(entities) {
+  drawPlanimetria(entities, cimexWidth = 10, cimexHeight = 10) {
     this.cimexes = entities;
     this.cimexes.forEach(c => {
       PIXI.Texture.fromURL(
@@ -90,8 +90,8 @@ class Planimetria {
         cimex.buttonMode = true;
         cimex.x = c.x;
         cimex.y = c.y;
-        cimex.width = 20;
-        cimex.height = 20;
+        cimex.width = cimexWidth;
+        cimex.height = cimexHeight;
         cimex.anchor.set(0.5);
         cimex
           .on('pointerdown', this.onDragStart.bind(this, cimex))
@@ -175,7 +175,7 @@ let dataCimexes = [
 
 let plan = new Planimetria(1700, 1300, false);
 document.body.appendChild(plan.app.view);
-plan.drawPlanimetria(dataCimexes);
+plan.drawPlanimetria(dataCimexes,10,10);
 
 // vorrei ricevere i dati ogni volta che finisce il dragEnd
 plan.setDragEndCallback(cx => console.log(cx));
