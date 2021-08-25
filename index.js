@@ -31,7 +31,7 @@ class Planimetria {
       width: width,
       height: height,
       antialias: true,
-      transparent: false,
+      transparent: true,
       resolution: 1
     });
 
@@ -53,7 +53,7 @@ class Planimetria {
       'https://raw.githubusercontent.com/andreatosato/anticimex-frontend/master/maps.png'
     ).then(tx => {
       let background = new PIXI.Sprite(tx);
-      console.log('back');
+      background.zIndex = -1;
       this.container.addChild(background);
     });
 
@@ -173,7 +173,7 @@ let dataCimexes = [
   new PlanimetriaEntity(250, 250, 'Mosca PLN')
 ];
 
-let plan = new Planimetria(400, 300, false);
+let plan = new Planimetria(1700, 1300, false);
 document.body.appendChild(plan.app.view);
 plan.drawPlanimetria(dataCimexes);
 
