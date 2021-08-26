@@ -208,7 +208,7 @@ let dataCimexes = [
   //{x :135, y : 70, code : 'test'}
 ];
 
-let plan = new Planimetria(875, 625, true);
+let plan = new Planimetria(875, 625, false);
 document.body.appendChild(plan.app.view);
 plan.drawPlanimetria(dataCimexes,15,15);
 
