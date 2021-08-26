@@ -41,7 +41,7 @@ class Planimetria {
     this.app = new Application({
       width: width,
       height: height,
-      antialias: true,
+      antialias: false,
       transparent: true,
       resolution: 1
     });
@@ -173,6 +173,13 @@ class Planimetria {
 
 }
 
+
+
+
+
+
+
+// SET DATA FOR RUNNING
 let maxWidth = 39;
 let maxHeight = 28;
 let width = 875;
