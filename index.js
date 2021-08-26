@@ -48,10 +48,8 @@ class Planimetria {
 
     this.cimexes = undefined;
 
-    this.graphics = new PIXI.Graphics();
-    this.app.stage.addChild(this.graphics);
-
     this.container = new PIXI.Container();
+    this.container.sortableChildren = true;
     if (!readOnly) {
       this.container.interactive = true;
       this.container.on('pointermove', this.onDragMove.bind(this));
@@ -60,6 +58,10 @@ class Planimetria {
     //this.container.scale.x = this.container.scale.y = ratio;
     this.app.stage.addChild(this.container);
 
+    this.graphics = new PIXI.Graphics();
+    this.graphics.zIndex = 1;
+    this.container.addChild(this.graphics);
+
     PIXI.Texture.fromURL(
       'https://raw.githubusercontent.com/andreatosato/anticimex-frontend/master/maps.png'
     ).then(tx => {
@@ -67,17 +69,11 @@ class Planimetria {
       background.zIndex = -1;
       this.container.addChild(background);
     });
-
+    // https://pixijs.io/pixi-text-style
     this.style = new PIXI.TextStyle({
       fontFamily: 'Arial',
-      fontSize: 14,
-      fill: ['#000000'],
-      stroke: '#000000', //'#4a1850',
-      strokeThickness: 0,
-      dropShadow: false,
-      wordWrap: true,
-      wordWrapWidth: 440,
-      lineJoin: 'round'
+      fontSize: 12,
+      fontWeight: "bold"
     });
     this.text = new PIXI.Text('init', this.style);
     this.text.x = Number.NaN;
@@ -161,13 +157,13 @@ class Planimetria {
     if (cimex) {
       const bounds = cimex.getBounds();
 
-      this.graphics.lineStyle(2, 0xff00ff, 1);
+      this.graphics.lineStyle(1, 0xff00ff, 1);
       this.graphics.beginFill(0x650a5a, 0.25);
       this.graphics.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
       this.graphics.endFill();
       this.text.text = cimex.code;
-      this.text.x = cimex.x;
-      this.text.y = cimex.y;
+      this.text.x = cimex.x + (cimex.width / 2) ;
+      this.text.y = cimex.y + (cimex.height / 2);
     } else {
       this.text.text = undefined;
       this.text.x = Number.NaN;
@@ -206,7 +202,7 @@ let dataCimexes = [
 
 let plan = new Planimetria(875, 625, false);
 document.body.appendChild(plan.app.view);
-plan.drawPlanimetria(dataCimexes,10,10);
+plan.drawPlanimetria(dataCimexes,15,15);
 
 // vorrei ricevere i dati ogni volta che finisce il dragEnd
 plan.setDragEndCallback(cx => console.log(cx));
