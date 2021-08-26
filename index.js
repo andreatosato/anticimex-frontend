@@ -204,13 +204,25 @@ let dataCimexes = [
   new PlanimetriaEntity(9, 19, 'Mosca PLN')
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
-
-  //{x :135, y : 70, code : 'test'}
 ];
 
-let plan = new Planimetria(875, 625, false);
-document.body.appendChild(plan.app.view);
-plan.drawPlanimetria(dataCimexes,15,15);
 
-// vorrei ricevere i dati ogni volta che finisce il dragEnd
-plan.setDragEndCallback(cx => console.log(cx));
+window.runReadonly = function(){
+  document.getElementById('planimetria').innerHTML = '';
+  let plan = new Planimetria(875, 625, true);
+  document.getElementById('planimetria').appendChild(plan.app.view);
+  //document.body.appendChild(plan.app.view);
+  plan.drawPlanimetria(dataCimexes,15,15);
+  // vorrei ricevere i dati ogni volta che finisce il dragEnd
+  plan.setDragEndCallback(cx => console.log(cx));
+}
+
+window.runDragging = function(){
+  document.getElementById('planimetria').innerHTML = '';
+  let plan = new Planimetria(875, 625, false);
+  document.getElementById('planimetria').appendChild(plan.app.view);
+  //document.body.appendChild(plan.app.view);
+  plan.drawPlanimetria(dataCimexes,15,15);
+  // vorrei ricevere i dati ogni volta che finisce il dragEnd
+  plan.setDragEndCallback(cx => console.log(cx));
+}
