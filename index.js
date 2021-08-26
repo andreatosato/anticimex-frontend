@@ -24,6 +24,7 @@ class PlanimetriaEntity {
 class Planimetria {
   constructor(width, height, readOnly) {
     this.dragging = false;
+    this.readOnly = readOnly;
 
     let Application = PIXI.Application,
       Container = PIXI.Container,
@@ -50,7 +51,7 @@ class Planimetria {
 
     this.container = new PIXI.Container();
     this.container.sortableChildren = true;
-    if (!readOnly) {
+    if (!this.readOnly) {
       this.container.interactive = true;
       this.container.on('pointermove', this.onDragMove.bind(this));
     }
@@ -115,7 +116,8 @@ class Planimetria {
 
   onDragStart(cimex, event) {
     this.dragging = cimex.code;
-    cimex.alpha = 0.5;
+    if(!this.readOnly)
+      cimex.alpha = 0.5;
   }
 
   onDragEnd(cimex, event) {
@@ -170,7 +172,6 @@ class Planimetria {
       this.text.y = Number.NaN;
     }
   }
-
 }
 
 
@@ -207,7 +208,7 @@ let dataCimexes = [
   //{x :135, y : 70, code : 'test'}
 ];
 
-let plan = new Planimetria(875, 625, false);
+let plan = new Planimetria(875, 625, true);
 document.body.appendChild(plan.app.view);
 plan.drawPlanimetria(dataCimexes,15,15);
 
