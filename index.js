@@ -147,11 +147,21 @@ class Planimetria {
       this.squareCimexes = [];
       this.cimexes.forEach(c => {
         let coordinates = {};
-        coordinates.x = 0;
-        coordinates.y = 0;
+        coordinates.x = this.calculateSquareX(c.x);
+        coordinates.y = this.calculateSquareY(c.y);
         this.squareCimexes.push(coordinates);
       });
     }
+  }
+
+  calculateSquareX(x){
+    let offset = 1 + (this.coordinates.maxWidth/ this.coordinates.maxXGraduate);
+    return ((x * this.coordinates.maxWidth) / this.coordinates.maxXGraduate) + offset;
+  }
+
+  calculateSquareY(y){
+    console.log(this.coordinates.maxHeight, this.coordinates.maxYGraduate);
+    return this.coordinates.maxHeight - ((y * this.coordinates.maxHeight)/this.coordinates.maxYGraduate);
   }
 
   onDragMove(event) {
