@@ -48,6 +48,7 @@ class Planimetria {
     });
 
     this.cimexes = undefined;
+    this.squareCimexes = undefined;
 
     this.container = new PIXI.Container();
     this.container.sortableChildren = true;
@@ -86,8 +87,9 @@ class Planimetria {
     this.dragEndCallBack = callback;
   }
 
-  drawPlanimetria(entities, cimexWidth = 10, cimexHeight = 10) {
+  drawPlanimetria(entities, coordinates, cimexWidth = 10, cimexHeight = 10) {
     this.cimexes = entities;
+    this.coordinates = coordinates;
     this.cimexes.forEach(c => {
       PIXI.Texture.fromURL(
         'https://image.flaticon.com/icons/svg/47/47059.svg'
@@ -130,8 +132,26 @@ class Planimetria {
       findCimex.y = cimex.y;
     }
 
-    if (this.dragEndCallBack) 
-      this.dragEndCallBack(this.cimexes);
+    if (this.dragEndCallBack)
+    {
+      this.setCoversionCoordinates();
+      this.dragEndCallBack({ 
+        cimex: this.cimexes,
+        squareCimex: this.squareCimexes
+      });
+    }
+  }
+
+  setCoversionCoordinates(){
+    if(this.cimexes !== undefined){
+      this.squareCimexes = [];
+      this.cimexes.forEach(c => {
+        let coordinates = {};
+        coordinates.x = 0;
+        coordinates.y = 0;
+        this.squareCimexes.push(coordinates);
+      });
+    }
   }
 
   onDragMove(event) {
@@ -205,15 +225,18 @@ let dataCimexes = [
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
 ];
-
+let coordinates = {
+  maxWidth : maxWidth,
+  maxXGraduate: width,
+  maxHeight: height,
+  maxYGraduate: height
+};
 
 window.runReadonly = function(){
   document.getElementById('planimetria').innerHTML = '';
   let plan = new Planimetria(875, 625, true);
   document.getElementById('planimetria').appendChild(plan.app.view);
-  //document.body.appendChild(plan.app.view);
-  plan.drawPlanimetria(dataCimexes,15,15);
-  // vorrei ricevere i dati ogni volta che finisce il dragEnd
+  plan.drawPlanimetria(dataCimexes,coordinates,15,15);
   plan.setDragEndCallback(cx => console.log(cx));
 }
 
@@ -221,8 +244,6 @@ window.runDragging = function(){
   document.getElementById('planimetria').innerHTML = '';
   let plan = new Planimetria(875, 625, false);
   document.getElementById('planimetria').appendChild(plan.app.view);
-  //document.body.appendChild(plan.app.view);
-  plan.drawPlanimetria(dataCimexes,15,15);
-  // vorrei ricevere i dati ogni volta che finisce il dragEnd
+  plan.drawPlanimetria(dataCimexes,coordinates,15,15);
   plan.setDragEndCallback(cx => console.log(cx));
 }
