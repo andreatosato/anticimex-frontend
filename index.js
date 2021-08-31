@@ -160,7 +160,6 @@ class Planimetria {
   }
 
   calculateSquareY(y){
-    console.log(this.coordinates.maxHeight, this.coordinates.maxYGraduate);
     return this.coordinates.maxHeight - ((y * this.coordinates.maxHeight)/this.coordinates.maxYGraduate);
   }
 
@@ -238,7 +237,7 @@ let dataCimexes = [
 let coordinates = {
   maxWidth : maxWidth,
   maxXGraduate: width,
-  maxHeight: height,
+  maxHeight: maxHeight,
   maxYGraduate: height
 };
 
