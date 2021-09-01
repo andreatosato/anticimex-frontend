@@ -49,6 +49,8 @@ class Planimetria {
     this.dragging = false;
     this.readOnly = readOnly;
     this.conversion = new Conversion();
+    this.width = width;
+    this.height = height;
 
     let Application = PIXI.Application,
       Container = PIXI.Container,
@@ -182,12 +184,16 @@ class Planimetria {
 
   onDragMove(event) {
     if (this.dragging) {
-      const cimex = this.container.children.find(c => c.code === this.dragging);
       let newPosition = event.data.getLocalPosition(this.app.stage);
-      cimex.x = newPosition.x;
-      cimex.y = newPosition.y;
-
-      this.updateCimex(cimex);
+      if(newPosition.x > 0 && newPosition.x < this.width
+        && newPosition.y > 0 && newPosition.x < this.height){
+        const cimex = this.container.children.find(c => c.code === this.dragging);
+        cimex.x = newPosition.x;
+        cimex.y = newPosition.y;
+  
+        this.updateCimex(cimex);
+      }
+      
     }
   }
 
