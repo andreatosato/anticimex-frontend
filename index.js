@@ -30,6 +30,16 @@ class PlanimetriaEntity {
     this.image = image;
     this.conversion = new Conversion();
   }
+
+  calculateX(maxWidth, maxXGraduate){
+    this.x = this.conversion.calculateX(this.proportionX, maxWidth, maxXGraduate);
+    return this;
+  }
+
+  calculateY(maxHeight, maxYGraduate){
+    this.y = this.conversion.calculateY(this.proportionY, maxHeight, maxYGraduate);
+    return this;
+  }
 }
 
 class Planimetria {
