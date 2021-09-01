@@ -98,7 +98,8 @@ class Planimetria {
     });
     // https://pixijs.io/pixi-text-style
     this.style = new PIXI.TextStyle({
-      fontFamily: 'Arial',
+      fill: "#011c46",
+      fontFamily: "Helvetica",
       fontSize: 12,
       fontWeight: "bold"
     });
