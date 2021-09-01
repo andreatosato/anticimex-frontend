@@ -186,7 +186,7 @@ class Planimetria {
     if (this.dragging) {
       let newPosition = event.data.getLocalPosition(this.app.stage);
       if(newPosition.x > 0 && newPosition.x < this.width
-        && newPosition.y > 0 && newPosition.x < this.height){
+        && newPosition.y > 0 && newPosition.y < this.height){
         const cimex = this.container.children.find(c => c.code === this.dragging);
         cimex.x = newPosition.x;
         cimex.y = newPosition.y;
