@@ -235,8 +235,8 @@ class Planimetria {
 // SET DATA FOR RUNNING
 let maxWidth = 39;
 let maxHeight = 28;
-let width = 876;
-let height = 625;
+let width = 1750;
+let height = 1250;
 let imageUrl = 'https://raw.githubusercontent.com/andreatosato/anticimex-frontend/master/maps.png';
 let dataCimexes = [
   new PlanimetriaEntity(10, 2, 'Mosca (10,2)')
