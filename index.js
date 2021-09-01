@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 
-
+/*Converte i pixel in punti sulla griglia */
 class Conversion {
   calculateX(proportionX, maxWidth, maxXGraduate){
     let offset = Math.trunc((1/maxXGraduate) * maxWidth);
@@ -21,6 +21,7 @@ class Conversion {
   }
 }
 
+/* Definisce i dati di un punto */
 class PlanimetriaEntity {
   constructor(x, y, code, description, image) {
     this.proportionX = x;
@@ -42,6 +43,7 @@ class PlanimetriaEntity {
   }
 }
 
+/* Gestisce e disegna la planimetria e i punti*/
 class Planimetria {
   constructor(width, height, readOnly) {
     this.dragging = false;
