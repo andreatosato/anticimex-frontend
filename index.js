@@ -45,7 +45,7 @@ class PlanimetriaEntity {
 
 /* Gestisce e disegna la planimetria e i punti*/
 class Planimetria {
-  constructor(width, height, readOnly) {
+  constructor(width, height, imageUrl, readOnly) {
     this.dragging = false;
     this.readOnly = readOnly;
     this.conversion = new Conversion();
@@ -88,9 +88,8 @@ class Planimetria {
     this.graphics.zIndex = 1;
     this.container.addChild(this.graphics);
 
-    PIXI.Texture.fromURL(
-      'https://raw.githubusercontent.com/andreatosato/anticimex-frontend/master/maps.png'
-    ).then(tx => {
+    PIXI.Texture.fromURL(imageUrl)
+    .then(tx => {
       let background = new PIXI.Sprite(tx);
       background.zIndex = -1;
       background.height = height;
@@ -231,6 +230,7 @@ let maxWidth = 39;
 let maxHeight = 28;
 let width = 1750;
 let height = 1250;
+let imageUrl = 'https://raw.githubusercontent.com/andreatosato/anticimex-frontend/master/maps.png';
 let dataCimexes = [
   new PlanimetriaEntity(10, 2, 'Mosca (10,2)')
     .calculateX(width, maxWidth)
@@ -260,7 +260,7 @@ let coordinates = {
 
 window.runReadonly = function(){
   document.getElementById('planimetria').innerHTML = '';
-  let plan = new Planimetria(width, height, true);
+  let plan = new Planimetria(width, height, imageUrl, true);
   document.getElementById('planimetria').appendChild(plan.app.view);
   plan.drawPlanimetria(dataCimexes,coordinates,15,15);
   plan.setDragEndCallback(cx => console.log(cx));
@@ -268,7 +268,7 @@ window.runReadonly = function(){
 
 window.runDragging = function(){
   document.getElementById('planimetria').innerHTML = '';
-  let plan = new Planimetria(width, height, false);
+  let plan = new Planimetria(width, height, imageUrl, false);
   document.getElementById('planimetria').appendChild(plan.app.view);
   plan.drawPlanimetria(dataCimexes,coordinates,15,15);
   plan.setDragEndCallback(cx => console.log(cx));
