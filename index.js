@@ -93,6 +93,8 @@ class Planimetria {
     ).then(tx => {
       let background = new PIXI.Sprite(tx);
       background.zIndex = -1;
+      background.height = height;
+      background.width = width;
       this.container.addChild(background);
     });
     // https://pixijs.io/pixi-text-style
@@ -227,25 +229,25 @@ class Planimetria {
 // SET DATA FOR RUNNING
 let maxWidth = 39;
 let maxHeight = 28;
-let width = 875;
-let height = 625;
+let width = 1750;
+let height = 1250;
 let dataCimexes = [
-  new PlanimetriaEntity(10, 2, 'Mosca 1234')
+  new PlanimetriaEntity(10, 2, 'Mosca (10,2)')
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
-  new PlanimetriaEntity(12, 25, 'Mosca EFG')
+  new PlanimetriaEntity(12, 25, 'Mosca (12,25)')
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
-  new PlanimetriaEntity(15, 15, 'Mosca HGO')
+  new PlanimetriaEntity(15, 15, 'Mosca (15,15)')
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
-  new PlanimetriaEntity(2, 5, 'Mosca EFJ')
+  new PlanimetriaEntity(2, 5, 'Mosca (2,5)')
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
-  new PlanimetriaEntity(8, 2, 'Mosca YBN')
+  new PlanimetriaEntity(8, 2, 'Mosca (8,2)')
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
-  new PlanimetriaEntity(9, 19, 'Mosca PLN')
+  new PlanimetriaEntity(9, 20, 'Mosca (9,20)')
     .calculateX(width, maxWidth)
     .calculateY(height, maxHeight),
 ];
@@ -258,7 +260,7 @@ let coordinates = {
 
 window.runReadonly = function(){
   document.getElementById('planimetria').innerHTML = '';
-  let plan = new Planimetria(875, 625, true);
+  let plan = new Planimetria(width, height, true);
   document.getElementById('planimetria').appendChild(plan.app.view);
   plan.drawPlanimetria(dataCimexes,coordinates,15,15);
   plan.setDragEndCallback(cx => console.log(cx));
@@ -266,7 +268,7 @@ window.runReadonly = function(){
 
 window.runDragging = function(){
   document.getElementById('planimetria').innerHTML = '';
-  let plan = new Planimetria(875, 625, false);
+  let plan = new Planimetria(width, height, false);
   document.getElementById('planimetria').appendChild(plan.app.view);
   plan.drawPlanimetria(dataCimexes,coordinates,15,15);
   plan.setDragEndCallback(cx => console.log(cx));
