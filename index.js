@@ -1,5 +1,26 @@
 import * as PIXI from 'pixi.js';
 
+
+class Conversion {
+  calculateX(proportionX, maxWidth, maxXGraduate){
+    let offset = Math.trunc((1/maxXGraduate) * maxWidth);
+    return ((proportionX * maxWidth)/maxXGraduate) - offset;
+  }
+
+  calculateY(proportionY, maxHeight, maxYGraduate){
+    return maxHeight - ((proportionY * maxHeight)/maxYGraduate);
+  }
+
+  calculateSquareX(x, maxWidth, maxXGraduate){
+    let offset = 1 + (maxWidth/ maxXGraduate);
+    return ((x * maxWidth) / maxXGraduate) + offset;
+  }
+
+  calculateSquareY(y, maxHeight, maxYGraduate){
+    return maxHeight - ((y * maxHeight)/maxYGraduate);
+  }
+}
+
 class PlanimetriaEntity {
   constructor(x, y, code, description, image) {
     this.proportionX = x;
@@ -7,17 +28,7 @@ class PlanimetriaEntity {
     this.code = code;
     this.description = description;
     this.image = image;
-  }
-
-  calculateX(maxWidth, maxXGraduate){
-    let offset = Math.trunc((1/maxXGraduate) * maxWidth);
-    this.x = ((this.proportionX * maxWidth)/maxXGraduate) - offset;
-    return this;
-  }
-
-  calculateY(maxHeight, maxYGraduate){
-    this.y = maxHeight - ((this.proportionY * maxHeight)/maxYGraduate);
-    return this;
+    this.conversion = new Conversion();
   }
 }
 
@@ -25,6 +36,7 @@ class Planimetria {
   constructor(width, height, readOnly) {
     this.dragging = false;
     this.readOnly = readOnly;
+    this.conversion = new Conversion();
 
     let Application = PIXI.Application,
       Container = PIXI.Container,
@@ -147,20 +159,11 @@ class Planimetria {
       this.squareCimexes = [];
       this.cimexes.forEach(c => {
         let coordinates = {};
-        coordinates.x = this.calculateSquareX(c.x);
-        coordinates.y = this.calculateSquareY(c.y);
+        coordinates.x = this.conversion.calculateSquareX(c.x, this.coordinates.maxWidth, this.coordinates.maxXGraduate);
+        coordinates.y = this.conversion.calculateSquareY(c.y, this.coordinates.maxHeight, this.coordinates.maxYGraduate);
         this.squareCimexes.push(coordinates);
       });
     }
-  }
-
-  calculateSquareX(x){
-    let offset = 1 + (this.coordinates.maxWidth/ this.coordinates.maxXGraduate);
-    return ((x * this.coordinates.maxWidth) / this.coordinates.maxXGraduate) + offset;
-  }
-
-  calculateSquareY(y){
-    return this.coordinates.maxHeight - ((y * this.coordinates.maxHeight)/this.coordinates.maxYGraduate);
   }
 
   onDragMove(event) {
