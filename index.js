@@ -120,7 +120,7 @@ class Planimetria {
     this.coordinates = coordinates;
     this.cimexes.forEach(c => {
       PIXI.Texture.fromURL(
-        'https://image.flaticon.com/icons/svg/47/47059.svg'
+        'https://th.bing.com/th/id/OIP.0gw66xw8OFG9HGawXdQb2gHaHa'
       ).then(tx => {
         let cimex = new PIXI.Sprite(tx);
         cimex.code = c.code;
